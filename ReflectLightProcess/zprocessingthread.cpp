@@ -25,12 +25,13 @@ void ZProcessingThread::run()
         cv::dilate(mat,matOut,matElement);
         img=cvMat2QImage(matOut);
         emit this->ZSigNewImg(4,img);
-#if 0
-        cv::Mat mat01;
-        cv::threshold(mat,mat01,200,255,CV_THRESH_BINARY);
-        img=cvMat2QImage(mat01);
-        emit this->ZSigNewImg(2,img);
 
+        cv::Mat mat01;
+        cv::threshold(matOut,mat01,200,255,CV_THRESH_BINARY);
+        img=cvMat2QImage(mat01);
+        emit this->ZSigNewImg(8,img);
+
+#if 0
         cv::Mat mat02;
         cv::threshold(mat,mat02,30,200.0,CV_THRESH_BINARY);
         img=cvMat2QImage(mat02);

@@ -24,7 +24,7 @@ void ZCaptureThread::run()
                 qDebug()<<"rate:"<<dRate;
             }else{
                 qDebug()<<"open rtsp failed.";
-                this->usleep(10000);
+                this->sleep(5);
                 continue;
             }
         }
@@ -38,7 +38,7 @@ void ZCaptureThread::run()
             continue;
         }
         this->m_fifo->ZAddFrame(mat);
-        this->usleep(100);
+        this->usleep(1000);
     }
     cap.release();
 }
