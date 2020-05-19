@@ -6,8 +6,9 @@
 
 #include <QDebug>
 #include <QTime>
-ZCaptureThread::ZCaptureThread(ZMatFIFO *fifo)
+ZCaptureThread::ZCaptureThread(QString ip,ZMatFIFO *fifo)
 {
+    this->m_ip=ip;
     this->m_fifo=fifo;
 }
 void ZCaptureThread::run()
@@ -18,7 +19,8 @@ void ZCaptureThread::run()
         if(!cap.isOpened())
         {
             qDebug()<<"connection lost!";
-            if(cap.open("rtsp://192.168.137.10:554/user=admin&password=&channel=1&stream=0.sdp?real_stream"))
+            QString rtspAddr=QString("rtsp://%1:554/user=admin&password=&channel=1&stream=0.sdp?real_stream").arg(this->m_ip);
+            if(cap.open(rtspAddr.toStdString()))
             {
                 double dRate=cap.get(CV_CAP_PROP_FPS);
                 qDebug()<<"rate:"<<dRate;

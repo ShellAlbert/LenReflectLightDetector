@@ -8,12 +8,13 @@ class ZProcessingThread : public QThread
 {
     Q_OBJECT
 public:
-    ZProcessingThread(ZMatFIFO *fifo);
+    ZProcessingThread(qint32 index,ZMatFIFO *fifo);
 signals:
     void ZSigNewImg(qint32 iWhich,const QImage &img);
 protected:
     void run();
 private:
+    qint32 m_index;
     ZMatFIFO *m_fifo;
 };
 

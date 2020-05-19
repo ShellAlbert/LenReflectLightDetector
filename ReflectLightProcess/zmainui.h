@@ -17,7 +17,7 @@ public:
     ~ZMainUI();
 
 public slots:
-    void ZSlotShowImg(qint32 iWhich,const QImage &img);
+    void ZSlotShowImg(qint32 iCh,const QImage &img);
 private slots:
     void ZSlotChFullScreen(bool bFullScreen);
 protected:

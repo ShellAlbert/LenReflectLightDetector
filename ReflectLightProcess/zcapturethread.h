@@ -8,7 +8,7 @@ class ZCaptureThread : public QThread
 {
     Q_OBJECT
 public:
-    ZCaptureThread(ZMatFIFO *fifo);
+    ZCaptureThread(QString ip,ZMatFIFO *fifo);
 
 signals:
     void ZSigFpsUpdated(qint32 iFps);
@@ -18,6 +18,7 @@ protected:
 private:
     qint32 getFps();
 private:
+    QString m_ip;
     ZMatFIFO *m_fifo;
 };
 

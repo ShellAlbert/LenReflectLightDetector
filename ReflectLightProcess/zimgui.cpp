@@ -3,16 +3,16 @@
 #include <QMouseEvent>
 #include <QDateTime>
 #include <QDebug>
-ZImgUI::ZImgUI(QWidget *parent) : QWidget(parent)
+ZImgUI::ZImgUI(qint32 iCh,QWidget *parent) : QWidget(parent)
 {
+    this->m_iCh=iCh;
     this->m_bFullScreen=false;
     this->m_iTsLast=QDateTime::currentDateTime().toMSecsSinceEpoch();
     this->m_iFrmTotal=0;
     this->m_iFps=0;
 }
-void ZImgUI::ZUpdateImg(qint32 iCh,const QImage &img)
+void ZImgUI::ZUpdateImg(const QImage &img)
 {
-    this->m_iCh=iCh;
     this->m_img=img;
     this->update();
 }
@@ -32,16 +32,20 @@ void ZImgUI::paintEvent(QPaintEvent *e)
     if(this->m_img.isNull())
     {
         painter.fillRect(QRectF(0,0,this->width(),this->height()),Qt::black);
-        painter.drawText(0,0,"No Signal");
+        painter.setPen(QPen(Qt::red,3));
+        QFont font=painter.font();
+        font.setPixelSize(24);
+        painter.setFont(font);
+        painter.drawText(QRectF(0,0,300,100),QString("CH%1-NoSignal").arg(this->m_iCh));
         return;
     }
 
     painter.drawImage(QRectF(0,0,this->width(),this->height()),this->m_img);
-    painter.setPen(QPen(Qt::red,3));
+    painter.setPen(QPen(Qt::green,3));
     QFont font=painter.font();
     font.setPixelSize(36);
     painter.setFont(font);
-    painter.drawText(QRectF(0,0,200,100),QString("CH%1-%2").arg(this->m_iCh).arg(this->m_iFps));
+    painter.drawText(QRectF(0,0,300,100),QString("CH%1-%2").arg(this->m_iCh).arg(this->m_iFps));
 }
 void ZImgUI::mousePressEvent(QMouseEvent *event)
 {

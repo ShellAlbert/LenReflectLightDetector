@@ -8,8 +8,8 @@ class ZImgUI : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ZImgUI(QWidget *parent = 0);
-    void ZUpdateImg(qint32 iCh,const QImage &img);
+    explicit ZImgUI(qint32 iCh,QWidget *parent = 0);
+    void ZUpdateImg(const QImage &img);
 signals:
     void ZSigFullScreen(bool bFullScreen);
 public slots:

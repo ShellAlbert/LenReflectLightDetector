@@ -6,7 +6,7 @@ ZMainUI::ZMainUI(QWidget *parent)
 {
     for(qint32 i=0;i<9;i++)
     {
-        this->m_llImg[i]=new ZImgUI;
+        this->m_llImg[i]=new ZImgUI(i+1);
         QObject::connect(this->m_llImg[i],SIGNAL(ZSigFullScreen(bool)),this,SLOT(ZSlotChFullScreen(bool)));
     }
     this->m_gridLayout=new QGridLayout;
@@ -30,11 +30,11 @@ ZMainUI::~ZMainUI()
     }
     delete this->m_gridLayout;
 }
-void ZMainUI::ZSlotShowImg(qint32 iWhich,const QImage &img)
+void ZMainUI::ZSlotShowImg(qint32 iCh,const QImage &img)
 {
-    if(iWhich>=0 && iWhich<=9)
+    if(iCh>=0 && iCh<=9)
     {
-        this->m_llImg[iWhich]->ZUpdateImg(iWhich,img);
+        this->m_llImg[iCh]->ZUpdateImg(img);
     }
 }
 void ZMainUI::ZSlotChFullScreen(bool bFullScreen)
